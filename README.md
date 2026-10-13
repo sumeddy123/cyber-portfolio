@@ -12,6 +12,14 @@ Cyber Security Engineering student at **George Mason University** building hands
 - Data analysis and structured datasets
 - Engineering design and prototyping
 
+## DevSecOps Projects
+
+- [Automated Security Pipeline](./devsecops/automated-security-pipeline/README.md) — tests, SAST, dependency and secret scans in GitHub Actions
+- [Container Security Lab](./devsecops/container-security-lab/README.md) — non-root Flask API with Docker runtime restrictions
+- [Security Alert Analyzer](./devsecops/security-alert-analyzer/README.md) — sliding-window authentication detection with synthetic data
+
+[Run the labs and explore the implementation](./devsecops/README.md).
+
 ## Featured Work
 
 ### Cybersecurity

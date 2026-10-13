@@ -1,0 +1,42 @@
+{
+  "events_processed": 12,
+  "threshold": 5,
+  "window_seconds": 300,
+  "alert_count": 3,
+  "alerts": [
+    {
+      "rule": "repeated_failed_logins",
+      "severity": "medium",
+      "timestamp": "2026-01-01T12:00:04+00:00",
+      "source_ip": "192.0.2.10",
+      "usernames": [
+        "demo"
+      ],
+      "failure_count": 5
+    },
+    {
+      "rule": "success_after_repeated_failures",
+      "severity": "high",
+      "timestamp": "2026-01-01T12:00:06+00:00",
+      "source_ip": "192.0.2.10",
+      "usernames": [
+        "demo"
+      ],
+      "failure_count": 5
+    },
+    {
+      "rule": "repeated_failed_logins",
+      "severity": "medium",
+      "timestamp": "2026-01-01T12:01:04+00:00",
+      "source_ip": "2001:db8::10",
+      "usernames": [
+        "user0",
+        "user1",
+        "user2",
+        "user3",
+        "user4"
+      ],
+      "failure_count": 5
+    }
+  ]
+}
