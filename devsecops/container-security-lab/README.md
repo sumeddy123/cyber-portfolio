@@ -1,6 +1,6 @@
 # Container Security Lab
 
-A stateless Flask API served by Gunicorn in a non-root Docker container. The API validates the same event schema used by the log analyzer, but does not store logs or perform detection itself.
+A stateless Flask API served by Gunicorn in a non-root Alpine-based Docker container. The API validates the same event schema used by the log analyzer, but does not store logs or perform detection itself.
 
 ## Docker quick start
 
@@ -66,3 +66,7 @@ See the parent guide for Windows-compatible Flask development commands. Gunicorn
 ## Scope
 
 This is a lab API, not a production service. It has no authentication, rate limiter, TLS termination, persistent store, or external integrations. Keep it on localhost. Before deployment those requirements need a separate design and testing effort. The test suite covers validation, body limits, error responses, methods, IPv6, and response headers.
+
+## Initial scan and remediation
+
+The first CI run built and smoke-tested a Debian slim image successfully, but Trivy blocked it on HIGH-severity inherited OS package findings with no fixed version reported. The runtime base was changed to Alpine to remove those unnecessary Debian package families. The same HIGH/CRITICAL gate remains enabled, including unfixed findings; the subsequent Actions result is the evidence for the replacement image. This change does not imply that Alpine is universally safer.

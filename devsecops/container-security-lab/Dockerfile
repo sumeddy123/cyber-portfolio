@@ -1,10 +1,10 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
 WORKDIR /app
 COPY requirements.txt ./
 RUN python -m pip install --no-cache-dir -r requirements.txt \
-    && groupadd --gid 10001 app \
-    && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
+    && addgroup -g 10001 app \
+    && adduser -D -H -u 10001 -G app -s /sbin/nologin app
 COPY app.py ./
 USER 10001:10001
 EXPOSE 8080
