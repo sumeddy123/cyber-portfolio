@@ -58,7 +58,7 @@ class AnalyzerTests(unittest.TestCase):
     def test_bad_record_reports_line(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'invalid.jsonl'
-            for line in ('not json', '{}', '[]', '{"timestamp":"2026-01-01"}'):
+            for line in ('not json', '{}', '[]', '{"timestamp":"2026-01-01T00:00:00Z","source_ip":123}', '{"timestamp":"2026-01-01"}'):
                 path.write_text('\n' + line, encoding='utf-8')
                 with self.assertRaisesRegex(ValueError, 'line 2'):
                     load_events(path)

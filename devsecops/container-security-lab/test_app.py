@@ -20,7 +20,7 @@ class APITests(unittest.TestCase):
 
     def test_invalid_fields(self):
         for key, value in [('timestamp', 'yesterday'), ('timestamp', '2026-01-01'),
-                           ('source_ip', 'bad'), ('username', ' '), ('outcome', 'unknown')]:
+                           ('source_ip', 'bad'), ('source_ip', 123), ('source_ip', True), ('username', ' '), ('outcome', 'unknown')]:
             event = dict(self.event, **{key: value})
             self.assertEqual(self.client.post('/validate-event', json=event).status_code, 400)
 

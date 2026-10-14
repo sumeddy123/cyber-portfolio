@@ -35,6 +35,8 @@ def create_app():
             timestamp = datetime.fromisoformat(item['timestamp'].replace('Z', '+00:00'))
             if timestamp.tzinfo is None:
                 raise ValueError('Timestamp needs a timezone')
+            if not isinstance(item['source_ip'], str):
+                raise ValueError('IP address must be a string')
             ip_address(item['source_ip'])
             if not isinstance(item['username'], str) or not 1 <= len(item['username'].strip()) <= 128:
                 raise ValueError('Invalid username')

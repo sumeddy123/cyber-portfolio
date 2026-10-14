@@ -1,15 +1,15 @@
 # Automated Security Pipeline
 
-The executable pipeline is [`.github/workflows/devsecops.yml`](../../.github/workflows/devsecops.yml). It checks both neighboring projects on pushes to main, pull requests that modify the labs, and manual Actions runs.
+The executable pipeline is [`.github/workflows/devsecops.yml`](../../../.github/workflows/devsecops.yml). It tests all executable portfolio projects on pushes to main, pull requests, and manual Actions runs.
 
 ## Stages and gates
 
 | Job / check | Purpose | Failure behavior |
 | --- | --- | --- |
-| Analyzer and API unit tests | Verify detection and validation behavior | Fail on test failure |
+| Portfolio unit tests | Verify detection and validation behavior | Fail on test failure |
 | Bandit | Scan application Python for risky patterns | Fail on detected findings |
 | pip-audit | Check pinned runtime packages against advisories | Fail on known vulnerabilities |
-| Trivy filesystem scan | Detect recognizable secrets in current lab files | Fail on a secret finding |
+| Trivy filesystem scan | Detect recognizable secrets in current repository files | Fail on a secret finding |
 | Docker build and smoke test | Check health, non-root UID, and restricted writes | Fail on build/runtime assertion failure |
 | Trivy image scan | Scan OS and language packages | Fail on HIGH/CRITICAL findings, including unfixed |
 | Report upload | Retain reports for investigation | Runs even after failures; artifacts retained 14 days |
@@ -27,13 +27,13 @@ From the repository root inside a Python 3.12 virtual environment:
 ```bash
 python -m pip install -r devsecops/container-security-lab/requirements.txt
 python -m pip install -r devsecops/automated-security-pipeline/requirements-tools.txt
-bandit devsecops/container-security-lab/app.py devsecops/security-alert-analyzer/analyzer.py
+bandit -r devsecops cybersecurity data programming -x test_app.py,test_analyzer.py,test_detector.py,test_vulns.py,test_sql.py,test_bst.py
 pip-audit -r devsecops/container-security-lab/requirements.txt --no-deps --disable-pip
 ```
 
 Runtime requirements include the resolved transitive packages. Audit scans exactly that set; update the full set together when dependencies change. Tool top-level versions are pinned, but their transitive dependencies are not fully locked. The image base tag is also mutable. Full hash locks and a maintained base digest are useful next steps.
 
-Trivy needs network access for its databases. Dependency auditing sends package names and versions to the advisory service. Secret scanning covers the current `devsecops` directory only, not repository history, other project folders, or remote systems.
+Trivy needs network access for its databases. Dependency auditing sends package names and versions to the advisory service. Secret scanning covers the current repository working tree, excluding `.git` and `.venv`; it does not scan repository history or remote systems.
 
 ## Interpreting a failure
 

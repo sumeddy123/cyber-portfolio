@@ -21,6 +21,8 @@ def load_events(path):
                 timestamp = datetime.fromisoformat(item['timestamp'].replace('Z', '+00:00'))
                 if timestamp.tzinfo is None:
                     raise ValueError('timestamp must include a timezone')
+                if not isinstance(item['source_ip'], str):
+                    raise ValueError('IP address must be a string')
                 ip = str(ip_address(item['source_ip']))
                 user = item['username']
                 if not isinstance(user, str) or not user.strip() or len(user) > 128:

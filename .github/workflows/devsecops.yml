@@ -2,9 +2,7 @@ name: DevSecOps labs
 on:
   push:
     branches: [main]
-    paths: ['devsecops/**', '.github/workflows/devsecops.yml']
   pull_request:
-    paths: ['devsecops/**', '.github/workflows/devsecops.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,13 +25,11 @@ jobs:
           python -m pip install -r devsecops/container-security-lab/requirements.txt
           python -m pip install -r devsecops/automated-security-pipeline/requirements-tools.txt
           mkdir -p reports
-      - name: Test the log analyzer
-        run: python -m unittest discover -s devsecops/security-alert-analyzer -v
-      - name: Test the API
-        run: python -m unittest discover -s devsecops/container-security-lab -v
+      - name: Test all portfolio projects
+        run: python scripts/verify.py --with-api
       - name: Scan Python source with Bandit
         if: ${{ !cancelled() }}
-        run: bandit devsecops/container-security-lab/app.py devsecops/security-alert-analyzer/analyzer.py -f json -o reports/bandit.json
+        run: bandit -r devsecops cybersecurity data programming -x test_app.py,test_analyzer.py,test_detector.py,test_vulns.py,test_sql.py,test_bst.py -f json -o reports/bandit.json
       - name: Audit runtime dependencies
         if: ${{ !cancelled() }}
         run: pip-audit -r devsecops/container-security-lab/requirements.txt --no-deps --disable-pip -f json -o reports/dependencies.json
@@ -43,7 +39,8 @@ jobs:
         with:
           version: v0.69.3
           scan-type: fs
-          scan-ref: devsecops
+          scan-ref: .
+          skip-dirs: .git,.venv
           scanners: secret
           format: json
           output: reports/secrets.json

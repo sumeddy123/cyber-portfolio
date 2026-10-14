@@ -1,46 +1,48 @@
-# Cybersecurity & Programming Portfolio
+# Sumedh Machhi · Cybersecurity & DevSecOps Portfolio
 
-Cyber Security Engineering student at **George Mason University** building hands-on experience across cybersecurity, programming, data, and engineering projects.
+Cyber Security Engineering student focused on Python automation, security monitoring, and reliable software delivery.
 
-## Focus Areas
+[![DevSecOps labs](https://github.com/sumeddy123/cyber-portfolio/actions/workflows/devsecops.yml/badge.svg)](https://github.com/sumeddy123/cyber-portfolio/actions/workflows/devsecops.yml)
 
-- Cybersecurity labs and simulated enterprise environments
-- Microsoft Azure, Microsoft Defender, and Tenable Nessus
-- Virtual machines, vulnerability management, and security monitoring
-- Python, Java, C, C++, and SQL
-- Data structures and algorithm fundamentals
-- Data analysis and structured datasets
-- Engineering design and prototyping
+## Start with the code
 
-## DevSecOps Projects
+| Project | What it demonstrates | Evidence |
+| --- | --- | --- |
+| [Security pipeline](devsecops/automated-security-pipeline/) | GitHub Actions, SAST, dependency and secret scans, container checks | [Workflow and reports](https://github.com/sumeddy123/cyber-portfolio/actions/workflows/devsecops.yml) |
+| [Container API](devsecops/container-security-lab/) | Flask validation, non-root Docker, restricted runtime | API tests, Dockerfile, Compose configuration |
+| [Authentication alert analyzer](devsecops/security-alert-analyzer/) | Sliding-window detection and failure/success correlation | Synthetic events, example JSON, boundary tests |
+| [Vulnerability report analyzer](cybersecurity/vulnerability-report-analyzer/) | CSV validation, severity prioritization, host summaries | Runnable fixture and malformed-input tests |
+| [SQL security analytics](data/sql-data-analysis/) | Relational schema, LEFT JOIN, aggregation, parameter binding | SQLite demo and constraint tests |
+| [Binary search tree](programming/data-structures/) | Iterative insertion, search, ordered traversal | Duplicate, empty, invalid-input and skewed-tree tests |
+| [SSH failure counter](cybersecurity/failed-login-detector/) | Log parsing, IPv4/IPv6 normalization, JSON output | Synthetic log and parser tests |
 
-- [Automated Security Pipeline](./devsecops/automated-security-pipeline/README.md) — tests, SAST, dependency and secret scans in GitHub Actions
-- [Container Security Lab](./devsecops/container-security-lab/README.md) — non-root Flask API with Docker runtime restrictions
-- [Security Alert Analyzer](./devsecops/security-alert-analyzer/README.md) — sliding-window authentication detection with synthetic data
+## Run in two minutes
 
-[Run the labs and explore the implementation](./devsecops/README.md).
+Requires Python 3.12+. From the repository root, no packages are needed for these commands:
 
-## Featured Work
+```bash
+python scripts/verify.py
+python data/sql-data-analysis/analyze.py
+python programming/data-structures/bst.py
+python cybersecurity/vulnerability-report-analyzer/analyze_vulns.py
+python cybersecurity/failed-login-detector/detector.py
+python devsecops/security-alert-analyzer/analyzer.py devsecops/security-alert-analyzer/sample_events.jsonl
+```
 
-### Cybersecurity
-- [Josh Madakor Cyber Range / Azure & Defender Lab](./cybersecurity/azure-defender-lab/README.md)
-- [Failed Login Detector — Practice Utility](./cybersecurity/failed-login-detector/README.md)
-- [Vulnerability Report Analyzer — Practice Utility](./cybersecurity/vulnerability-report-analyzer/README.md)
+For the API, create a virtual environment, install its dependencies, then include its tests:
 
-### Programming & Data
-- [Programming Portfolio](./programming/README.md)
-- [SQL & Data Analysis](./data/sql-data-analysis/README.md)
-- [Data Structures](./programming/data-structures/README.md)
+```bash
+python -m venv .venv
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux: source .venv/bin/activate
+python -m pip install -r devsecops/container-security-lab/requirements.txt
+python scripts/verify.py --with-api
+```
 
-### Engineering
-- [Desktop Study Assistant Robot](./engineering/study-assistant-robot/README.md)
+See the [DevSecOps guide](devsecops/) for Docker and API commands, and the [project walkthrough](docs/project-walkthrough.md) for design decisions and hands-on exercises.
 
-## Current Development
+## Background and ongoing learning
 
-- CompTIA Security+ preparation
-- Networking fundamentals
-- Cloud and endpoint security
-- Vulnerability assessment and remediation
-- Security monitoring and investigation
+[Azure & Defender lab notes](cybersecurity/azure-defender-lab/) · [Engineering coursework](engineering/study-assistant-robot/) · [Security+ preparation](security-plus/)
 
-> This portfolio is actively being expanded with class projects, lab screenshots, code samples, and technical write-ups.
+These sections contain learning notes; the table above points to executable implementations. Samples are synthetic. These educational projects were developed with AI assistance and do not represent employer work or production deployments. CI badges reflect the current run status, not a guarantee that software is vulnerability-free.

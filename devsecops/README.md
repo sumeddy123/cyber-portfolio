@@ -40,13 +40,13 @@ The Flask command is a local development server. Docker uses Gunicorn instead. O
 - **CI:** The workflow automatically tests and scans changed code. This lab does not deploy an application to production.
 - **SAST:** Bandit inspects Python code for risky patterns; it cannot prove the application is secure.
 - **Dependency scanning:** pip-audit compares installed package versions with published vulnerability advisories.
-- **Secret scanning:** Trivy checks files for recognizable secret patterns. This workflow scans the current `devsecops` directory, not Git history.
+- **Secret scanning:** Trivy checks files for recognizable secret patterns. This workflow scans the current repository working tree, not Git history.
 - **Container hardening:** A non-root user, read-only filesystem, removed capabilities, and resource limits restrict runtime behavior.
 - **Detection logic:** A time-window threshold is an investigation signal, not proof of an attack.
 
 ## Validation
 
-The initial implementation passed 17 local unit tests and a Bandit source scan. The analyzer's example output is generated from the included fixture. Runtime dependency audit results and Docker/Trivy results are available in GitHub Actions; advisory databases and base images change over time. Consult the actual run status rather than treating any scan as a permanent clean bill of health.
+The expanded portfolio passed 29 local unit tests and a Bandit source scan. Run `python scripts/verify.py --with-api` after installing the API dependencies to reproduce the tests. The analyzer's example output is generated from the included fixture. Runtime dependency audit results and Docker/Trivy results are available in GitHub Actions; advisory databases and base images change over time. Consult the actual run status rather than treating any scan as a permanent clean bill of health.
 
 ## Next hands-on exercises
 

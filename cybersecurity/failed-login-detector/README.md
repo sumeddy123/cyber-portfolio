@@ -1,33 +1,13 @@
-# Failed Login Detector
+# SSH failure counter
 
-A small Python **practice utility** for parsing Linux-style SSH authentication logs and flagging IP addresses with repeated failed login attempts.
-
-## Concepts Practiced
-
-- Log parsing
-- Regular expressions
-- Python file handling
-- Counters and dictionaries
-- Threshold-based alert logic
-- Basic brute-force detection concepts
-
-## Run
+An offline parser for Linux-style `Failed password ... from <IP>` lines. Counts valid source addresses, normalizes IPv6, flags a configurable threshold, and exports JSON. The bundled log is synthetic.
 
 ```bash
-python detector.py sample_auth.log
+python cybersecurity/failed-login-detector/detector.py
+python cybersecurity/failed-login-detector/detector.py cybersecurity/failed-login-detector/sample_auth.log 5 --output reports/ssh.json
+python -m unittest discover -s cybersecurity/failed-login-detector -v
 ```
 
-Use a custom threshold:
+The JSON contains counts, suspicious addresses, total valid failures, and an invalid-address counter. The threshold must be positive. Invalid addresses are skipped and counted; unrelated log lines are ignored. Missing files and invalid CLI arguments produce nonzero exits.
 
-```bash
-python detector.py sample_auth.log 5
-```
-
-## Next Improvements
-
-- Add timestamp-based rate detection
-- Export alerts to JSON or CSV
-- Correlate failed and successful logins
-- Test against logs generated from my own VM
-
-> This is a practice project that I am using to strengthen Python and security-monitoring fundamentals.
+This is a whole-file counter, not a time-based brute-force detector. It does not resolve hostnames or block traffic, and supports this SSH message pattern only. See [the alert analyzer](../../devsecops/security-alert-analyzer/) for sliding windows and successful-login correlation.

@@ -1,37 +1,10 @@
-# Programming Portfolio
+# Programming projects
 
-Programming experience developed through coursework, labs, and independent practice.
+Executable examples with focused tests:
 
-## Languages
+- [Binary search tree](data-structures/): iteration, classes, ordered traversal, complexity tradeoffs.
+- [SQL security analytics](../data/sql-data-analysis/): joins, grouping, constraints, parameterized queries.
+- [SSH failure counter](../cybersecurity/failed-login-detector/): file parsing, regular expressions, dictionaries.
+- [Vulnerability report analyzer](../cybersecurity/vulnerability-report-analyzer/): validation, sorting, CSV and JSON.
 
-- Python
-- Java
-- C
-- C++
-- SQL
-
-## Concepts
-
-- Functions and modular programming
-- Loops and conditionals
-- File input/output
-- Object-oriented programming
-- Debugging and troubleshooting
-- Data structures
-- Binary trees
-- Structured data and SQL queries
-- Console / ASCII applications
-- Small game-style programs
-
-## Repository Plan
-
-I am continuing to add selected school and independent projects here after cleaning the code and removing any course-specific or sensitive information.
-
-### Planned Uploads
-
-- [ ] Python file-processing project
-- [ ] Java object-oriented programming project
-- [ ] C/C++ console project
-- [ ] Binary-tree implementation
-- [ ] Small game project
-- [ ] SQL query exercises
+Run `python scripts/verify.py` from the repository root to test these projects and the authentication alert analyzer. Additional coursework can be added once its source and supporting explanation are ready.
